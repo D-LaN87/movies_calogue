@@ -11,15 +11,10 @@ def homepage():
     try:
         response = requests.get(API_URL)
         response.raise_for_status()
-        print("Status odpowiedzi:", response.status_code)
-        print("Pełna odpowiedź JSON:", response.json())
-
         movies = response.json().get('results', [])
     except Exception as e:
         print(f"Błąd pobierania filmów: {e}")
         movies = []
-
-    print("Lista filmów:", movies)
     return render_template("homepage.html", movies=movies)
 
 if __name__ == '__main__':
